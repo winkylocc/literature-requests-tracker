@@ -3,6 +3,15 @@ import EntryForm from './components/EntryForm';
 import EntryList from './components/EntryList';
 import SearchBar from './components/SearchBar';
 import './App.css'
+import { db } from './firebase'
+import {
+  collection,
+  onSnapshot,
+  addDoc,
+  deleteDoc,
+  doc,
+  updateDoc
+} from 'firebase/firestore'
 
 function App() {
   const [entries, setEntries] = useState([]);
@@ -10,30 +19,38 @@ function App() {
   const [editEntry, setEditEntry] = useState(null);
 
   useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem('lit_entries')) || [];
-    setEntries(saved);
-  }, []);
+    const unsubscribe = onSnapshot(collection(db, 'entries'), (snapshot) => {
+      const data = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }))
+      setEntries(data)
+    })
+  
+    return () => unsubscribe()
+  }, [])
+  
 
-  useEffect(() => {
-    localStorage.setItem('lit_entries', JSON.stringify(entries));
-  }, [entries]);
-
-  const addEntry = (entry) => {
+  const addEntry = async (entry) => {
     if (editEntry) {
+      const entryRef = doc(db, 'entries', editEntry.id)
+      await updateDoc(entryRef, entry)
       setEntries((prev) =>
-      prev.map((e) => (e.id === editEntry.id ? { ...editEntry, ...entry } : e))
-    );
-    setEditEntry(null);
+        prev.map((e) => (e.id === editEntry.id ? { ...editEntry, ...entry } : e))
+      )
+      setEditEntry(null)
     } else {
-      setEntries((prev) => [...prev, {...entry, id: Date.now().toString() }]);
+      const docRef = await addDoc(collection(db, 'entries'), entry)
+      setEntries((prev) => [...prev, { id: docRef.id, ...entry }])
     }
-  };
-
-  const deleteEntry = (id) => {
-    if(window.confirm("Are you sure you want to delete this entry?")) {
-      setEntries((prev) => prev.filter((entry) => entry.id !== id));
+  }
+  
+  const deleteEntry = async (id) => {
+    if (window.confirm('Are you sure you want to delete this entry?')) {
+      await deleteDoc(doc(db, 'entries', id))
+      setEntries((prev) => prev.filter((entry) => entry.id !== id))
     }
-  };
+  }  
 
   const startEdit = (entry) => {
     setEditEntry(entry)
