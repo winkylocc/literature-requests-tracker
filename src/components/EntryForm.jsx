@@ -17,14 +17,21 @@ function EntryForm({ addEntry, editEntry }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("🟢 handleSubmit triggered");
+    
     if (!name || !item) return;
-
-    addEntry({ name, item, quantity, date });
+  
+    const entry = { name, item, quantity, date };
+    console.log("📦 Submitting entry to addEntry:", entry);
+  
+    addEntry(entry);
+  
     setName('');
     setItem('');
     setQuantity(1);
     setDate(new Date().toISOString().slice(0, 10));
   };
+  
 
   return (
     <form onSubmit={handleSubmit} style={{ marginTop: '1rem' }}>
