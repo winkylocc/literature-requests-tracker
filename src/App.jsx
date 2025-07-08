@@ -11,7 +11,9 @@ import {
   deleteDoc,
   doc,
   updateDoc
-} from 'firebase/firestore'
+} from 'firebase/firestore';
+import './styles/main.scss';
+
 
 function App() {
   const [entries, setEntries] = useState([]);
@@ -24,7 +26,6 @@ function App() {
         id: doc.id,
         ...doc.data()
       }))
-      console.log("📥 Firestore snapshot:", data);  // Add this line
       setEntries(data)
     })
   
@@ -33,13 +34,9 @@ function App() {
   
 
   const addEntry = async (newEntry) => {
-    console.log("📥 Received new entry in App.jsx addEntry:", newEntry);
   
     try {
-      console.log("📤 Sending to Firestore:", newEntry);
-
       const docRef = await addDoc(collection(db, 'entries'), newEntry);
-      console.log("✅ Created new entry with ID:", docRef.id);
     } catch (error) {
       console.error("❌ Failed to add entry:", error);
     }

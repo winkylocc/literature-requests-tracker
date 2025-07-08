@@ -17,13 +17,10 @@ function EntryForm({ addEntry, editEntry }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("🚨 THIS IS A TEST ALERT FROM handleSubmit 🚨");
-    console.log("🚨 TEST CONSOLE LOG FROM handleSubmit");
 
     if (!name || !item) return;
   
     const entry = { name, item, quantity, date };
-    console.log("📦 Submitting entry:", entry);  // ← Add this line
     addEntry(entry);
     setName('');
     setItem('');

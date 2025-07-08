@@ -13,6 +13,5 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
-console.log("Connected Firestore app:", app.name);
-console.log("Project ID:", app.options.projectId);
+
 export { db }
