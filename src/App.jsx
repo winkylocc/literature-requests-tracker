@@ -14,7 +14,6 @@ import {
 // Styles
 import './styles/main.scss';
 
-
 function App() {
   const [entries, setEntries] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
