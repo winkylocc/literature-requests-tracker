@@ -17,20 +17,17 @@ function EntryForm({ addEntry, editEntry }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("🟢 handleSubmit triggered");
-    
+    console.log("🟢 EntryForm handleSubmit triggered"); // Add this
+  
     if (!name || !item) return;
   
     const entry = { name, item, quantity, date };
-    console.log("📦 Submitting entry to addEntry:", entry);
-  
     addEntry(entry);
-  
     setName('');
     setItem('');
     setQuantity(1);
     setDate(new Date().toISOString().slice(0, 10));
-  };
+  };  
   
 
   return (

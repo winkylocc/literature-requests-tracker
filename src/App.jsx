@@ -31,18 +31,16 @@ function App() {
   }, [])
   
 
-  const addEntry = async (entry) => {
-    console.log("📦 Submitting entry:", entry)
-    if (editEntry) {
-      const entryRef = doc(db, 'entries', editEntry.id)
-      console.log("✏️ Updating entry ID:", editEntry.id)
-      await updateDoc(entryRef, entry)
-      setEditEntry(null)
-    } else {
-      const docRef = await addDoc(collection(db, 'entries'), entry)
-      console.log("✅ Created new entry with ID:", docRef.id)
+  const addEntry = async (newEntry) => {
+    console.log("📥 Received new entry in App.jsx addEntry:", newEntry);
+  
+    try {
+      const docRef = await addDoc(collection(db, 'entries'), newEntry);
+      console.log("✅ Created new entry with ID:", docRef.id);
+    } catch (error) {
+      console.error("❌ Failed to add entry:", error);
     }
-  }  
+  };  
   
   const deleteEntry = async (id) => {
     if (window.confirm('Are you sure you want to delete this entry?')) {
