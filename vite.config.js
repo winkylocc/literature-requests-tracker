@@ -13,19 +13,19 @@ export default defineConfig({
         'favicon/favicon.svg'],
       manifest: {
         name: 'Literature Requests Tracker',
-        short_name: 'LitReqs  ',
+        short_name: 'LitReqs',
         start_url: '/',
         display: 'standalone',
         background_color: '#ffffff',
         theme_color: '#3f51b5',
         icons: [
           {
-            src: 'public/favicon/web-app-manifest-192x192.png',
+            src: 'favicon/web-app-manifest-192x192.png',
             sizes: '192x192',
             type: 'image/png'
           },
           {
-            src: 'public/favicon/web-app-manifest-512x512.png',
+            src: 'favicon/web-app-manifest-512x512.png',
             sizes: '512x512',
             type: 'image/png'
           }
