@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import EntryForm from './components/EntryForm';
 import EntryList from './components/EntryList';
 import SearchBar from './components/SearchBar';
-import { db } from './firebase'
+import { db } from './firebase';
 import {
   collection,
   onSnapshot,
@@ -10,6 +10,8 @@ import {
   deleteDoc,
   doc,
 } from 'firebase/firestore';
+
+// Styles
 import './styles/main.scss';
 
 
