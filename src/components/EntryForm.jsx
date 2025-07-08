@@ -17,7 +17,8 @@ function EntryForm({ addEntry, editEntry }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Form submitted!"); // Add just after preventDefault
+    alert("🚨 THIS IS A TEST ALERT FROM handleSubmit 🚨");
+    console.log("🚨 TEST CONSOLE LOG FROM handleSubmit");
 
     if (!name || !item) return;
   
