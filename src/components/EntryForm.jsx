@@ -61,7 +61,7 @@ function EntryForm({ addEntry, editEntry }) {
         onChange={(e) => setDate(e.target.value)}
         style={{ display: 'block', marginBottom: '0.5rem', width: '100%' }}
       />
-      <button type="submit" style={{ width: '100%' }}>{editEntry ? "Update Entry" : "Add Entry"}</button>
+      <button className="add-entry" type="submit" style={{ width: '100%' }}>{editEntry ? "Update Entry" : "Add Entry"}</button>
     </form>
   );
 }

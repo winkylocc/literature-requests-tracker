@@ -58,7 +58,7 @@ function App() {
   );
 
   return (
-    <div>
+    <div className="app-container">
       <h1>Literature Requests Tracker</h1>
       <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       <EntryForm addEntry={addEntry} editEntry={editEntry}/>
