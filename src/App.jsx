@@ -32,13 +32,15 @@ function App() {
   
 
   const addEntry = async (entry) => {
+    console.log("📦 Submitting entry:", entry)
     if (editEntry) {
       const entryRef = doc(db, 'entries', editEntry.id)
+      console.log("✏️ Updating entry ID:", editEntry.id)
       await updateDoc(entryRef, entry)
-      setEditEntry(null) // ✅ trust Firestore to trigger re-render
+      setEditEntry(null)
     } else {
-      await addDoc(collection(db, 'entries'), entry)
-      // ✅ Firestore will automatically call onSnapshot
+      const docRef = await addDoc(collection(db, 'entries'), entry)
+      console.log("✅ Created new entry with ID:", docRef.id)
     }
   }  
   
