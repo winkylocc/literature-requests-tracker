@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import EntryForm from './components/EntryForm';
 import EntryList from './components/EntryList';
 import SearchBar from './components/SearchBar';
-import './App.css'
 import { db } from './firebase'
 import {
   collection,
@@ -10,7 +9,6 @@ import {
   addDoc,
   deleteDoc,
   doc,
-  updateDoc
 } from 'firebase/firestore';
 import './styles/main.scss';
 
