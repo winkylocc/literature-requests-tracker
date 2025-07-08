@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function EntryForm({ addEntry }) {
+function EntryForm({ addEntry, editEntry }) {
   const [name, setName] = useState('');
   const [item, setItem] = useState('');
   const [quantity, setQuantity] = useState(1);
