@@ -17,8 +17,8 @@ function EntryForm({ addEntry, editEntry }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("🟢 EntryForm handleSubmit triggered"); // Add this
-  
+    alert("Form submitted!"); // Add just after preventDefault
+
     if (!name || !item) return;
   
     const entry = { name, item, quantity, date };
