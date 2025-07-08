@@ -35,22 +35,19 @@ function App() {
     if (editEntry) {
       const entryRef = doc(db, 'entries', editEntry.id)
       await updateDoc(entryRef, entry)
-      setEntries((prev) =>
-        prev.map((e) => (e.id === editEntry.id ? { ...editEntry, ...entry } : e))
-      )
-      setEditEntry(null)
+      setEditEntry(null) // ✅ trust Firestore to trigger re-render
     } else {
-      const docRef = await addDoc(collection(db, 'entries'), entry)
-      setEntries((prev) => [...prev, { id: docRef.id, ...entry }])
+      await addDoc(collection(db, 'entries'), entry)
+      // ✅ Firestore will automatically call onSnapshot
     }
-  }
+  }  
   
   const deleteEntry = async (id) => {
     if (window.confirm('Are you sure you want to delete this entry?')) {
       await deleteDoc(doc(db, 'entries', id))
-      setEntries((prev) => prev.filter((entry) => entry.id !== id))
+      // ✅ Firestore will handle update
     }
-  }  
+  }   
 
   const startEdit = (entry) => {
     setEditEntry(entry)
