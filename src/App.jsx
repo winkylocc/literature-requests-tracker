@@ -24,6 +24,7 @@ function App() {
         id: doc.id,
         ...doc.data()
       }))
+      console.log("📥 Firestore snapshot:", data);  // Add this line
       setEntries(data)
     })
   
@@ -35,6 +36,8 @@ function App() {
     console.log("📥 Received new entry in App.jsx addEntry:", newEntry);
   
     try {
+      console.log("📤 Sending to Firestore:", newEntry);
+
       const docRef = await addDoc(collection(db, 'entries'), newEntry);
       console.log("✅ Created new entry with ID:", docRef.id);
     } catch (error) {

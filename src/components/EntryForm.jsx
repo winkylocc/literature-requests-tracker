@@ -22,6 +22,7 @@ function EntryForm({ addEntry, editEntry }) {
     if (!name || !item) return;
   
     const entry = { name, item, quantity, date };
+    console.log("📦 Submitting entry:", entry);  // ← Add this line
     addEntry(entry);
     setName('');
     setItem('');
