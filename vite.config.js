@@ -11,7 +11,8 @@ export default defineConfig({
         'favicon/favicon.ico',
         'favicon/apple-touch-icon.png',
         'favicon/favicon-96x96.png',
-        'favicon/favicon.svg'],
+        'favicon/favicon.svg'
+      ],
       manifest: {
         name: 'Literature Requests Tracker',
         short_name: 'LitReqs',
@@ -31,6 +32,10 @@ export default defineConfig({
             type: 'image/png'
           }
         ]
+      },
+      workbox: {
+        navigateFallback: '/index.html',
+        globPatterns: ['**/*.{js,css,html,ico,png,svg}']
       }
     })
   ]
